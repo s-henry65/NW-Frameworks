@@ -1,0 +1,9 @@
+env
+on_hold.txt
+*.log
+*.pot
+*.pyc
+__pycache__
+Pipfile.lock
+Pipfile
+.env

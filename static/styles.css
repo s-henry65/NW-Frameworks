@@ -1,0 +1,38 @@
+h1 {
+    color: blueviolet;
+}
+
+body {
+    font-family:'Verdana, Segoe UI', Tahoma, Geneva, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.navbar a {
+    color:black;
+    text-decoration: none;
+}
+    
+.navbar a:active,
+.navbar a:hover {
+    color:darkred
+}
+
+#footer {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#footer a:active,
+#footer a:hover {
+    color:darkred;
+}
+
+#footer a {
+    color:black;
+    text-decoration: none;
+}
