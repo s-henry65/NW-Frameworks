@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     'nw_users_app',
     'nw_orders_app',
     'crispy_forms',
-    
-
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -132,4 +131,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')

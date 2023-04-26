@@ -2,11 +2,28 @@ h1 {
     color: blueviolet;
 }
 
+h2 {
+    color:darkgreen;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 2px 2px 5px darkgray;
+}
+
+.greeting {
+    font-size: 16pt;
+    color:darkgrey;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
 body {
     font-family:'Verdana, Segoe UI', Tahoma, Geneva, sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    /* background-image: url('/images/bg_wood.jpg'); */
+}
+
+img {
+    border-radius: 6px;
 }
 
 .navbar {
@@ -36,3 +53,11 @@ body {
     color:black;
     text-decoration: none;
 }
+
+.alert {
+    color:crimson;
+  }
+
+/* #form {
+    background-image: url('/images/bg_wood.jpg');
+} */

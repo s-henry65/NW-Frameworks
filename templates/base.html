@@ -12,7 +12,10 @@
 </head>
 
 <body>
-  <nav class="navbar px-4 navbar-expand-lg navbar-light" id="navbar">
+  <div class="d-flex mt-4 mb-2 justify-content-center">
+    <img src="/images/nwfw_logo.jpg">
+</div>
+  <nav class="navbar px-4 pb-3 mb-2 navbar-expand-lg navbar-light sticky-top bg-white" id="navbar">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -63,6 +66,15 @@
       </ul>
     </div>
   </nav>
+  <div class="d-flex justify-content-center">
+    {% if messages %}
+    {% for message in messages %}
+    <div class=alert {{message.tags}}>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
   {% block content %} {% endblock %}
 
   <footer class="mt-auto">
