@@ -7,3 +7,4 @@ __pycache__
 Pipfile.lock
 Pipfile
 .env
+images_xtra
