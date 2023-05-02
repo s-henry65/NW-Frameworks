@@ -1,0 +1,97 @@
+{% extends 'base-user.html' %} {% block content %}
+<div class="container-md">
+    <h2 class="text-center mt-4">Place an Order</h2>
+    <div class="d-flex justify-content-center">
+        <div class="p-4 form-control border border-secondary bg-light" id="form">
+            <form class='row' action="{% url 'update_user_profile' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="col-md-4 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Profile</span>
+                        <select name="profile" class="form-control border-secondary" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" required>
+                            <option>Select</option>
+                            {% for profile in profile_data %}
+                            <option value="{{profile.id}}">{{profile.number}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Frame Depth</span>
+                        <input type="text" placeholder="Enter 1/4's" name="depth" class="form-control 
+                                    bg-white border-secondary" aria-label="Sizing example input" required
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Wood</span>
+                        <select name="wood" class="form-control border-secondary" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" required>
+                            <option>Select</option>
+                            {% for wood in wood_data %}
+                            <option value="{{wood.id}}">{{wood.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Spline</span>
+                        <select name="spline" class="form-control border-secondary" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" required>
+                            <option>Select</option>
+                            {% for wood in wood_data %}
+                            <option value="{{wood.id}}">{{wood.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-8 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Finish</span>
+                        <select name="finish" class="form-control border-secondary" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" required>
+                            <option>Select</option>
+                            {% for finish in finish_data %}
+                            <option value="{{finish.id}}">{{finish.number}}, {{finish.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Frame width</span>
+                        <input type="text" placeholder="e.g. 24 1/2" name="frame_width" class="form-control 
+                                    bg-white border-secondary" aria-label="Sizing example input" required
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Frame Height</span>
+                        <input type="text" placeholder="e.g. 36 5/8" name="frame_height" class="form-control 
+                                    bg-white border-secondary" aria-label="Sizing example input" required
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="justify-content-left">
+                    <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

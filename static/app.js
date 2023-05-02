@@ -1,3 +1,4 @@
+console.log('Hello World!')
 // window.alert("JavaScript Loaded");
 
 // $('.nav-link').on('click', function(){

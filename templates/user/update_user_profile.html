@@ -1,82 +1,98 @@
 {% extends 'base-user.html' %} {% block content %}
 <div class="container">
-    <h2 class="text-center mt-4">User Profile Update</h2>
+    <h2 class="text-center mt-4 mb-3">User Profile Update</h2>
+    <div class="d-flex  justify-content-center">
+        <div class="p-4 form-control border border-secondary bg-light" id="form">
+            <form class='row' action="{% url 'update_user_profile' %}" method="POST">
+                {% csrf_token %}
 
-    <div class="d-flex justify-content-center">
-        <form action="{% url 'update_user_profile' %}" method="POST">
-            {% csrf_token %}
-            <div class="row my-2">
-                <div class="col-md-12 p-4 form-control border border-secondary bg-light" id="form">
-                    <div class="input-group mb-4">
-                        <span class="input-group-text text-white bg-secondary border-secondary"
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
                             id="inputGroup-sizing-default">First Name</span>
                         <input type="text" value="{{user_data.first_name}}" name="first_name" class="form-control 
-                                border-secondary" required aria-label="Sizing example input"
+                        border-secondary" required aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-                    <div class="input-group mb-4">
-                        <span class="input-group-text text-white bg-secondary border-secondary" 
-                        id="inputGroup-sizing-default">Last Name</span>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Last Name</span>
                         <input type="text" value="{{user_data.last_name}}" name="last_name" class="form-control 
-                                bg-white border-secondary" required aria-label="Sizing example input"
+                        bg-white border-secondary" required aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-                    <div class="input-group mb-4">
-                        <span class="input-group-text text-white bg-secondary border-secondary" 
-                        id="inputGroup-sizing-default">Phone Number</span>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Phone Number</span>
                         <input type="text" value="{{user_data.phone_num}}" name="phone_num" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-                    <div class="input-group mb-4">
-                        <span class="input-group-text text-white bg-secondary border-secondary" 
-                        id="inputGroup-sizing-default">Email</span>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Email</span>
                         <input type="email" value="{{user_data.email}}" name="email" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-                    <div class="input-group mb-4">
-                        <span class="input-group-text text-white bg-secondary border-secondary" 
-                        id="inputGroup-sizing-default">Shop Name</span>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Shop Name</span>
                         <input type="text" value="{{user_data.shop_name}}" name="shop_name" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-                    <div class="input-group mb-4">
-                        <span class="input-group-text text-white bg-secondary border-secondary" 
-                        id="inputGroup-sizing-default">Shop Address</span>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Shop Address</span>
                         <input type="text" value="{{user_data.shop_address}}" name="shop_address" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-                    <div class="input-group mb-4">
-                        <span class="input-group-text text-white bg-secondary border-secondary" 
-                        id="inputGroup-sizing-default">City</span>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">City</span>
                         <input type="text" value="{{user_data.shop_city}}" name="shop_city" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-                    <div class="input-group mb-4">
-                        <span class="input-group-text text-white bg-secondary border-secondary" 
-                        id="inputGroup-sizing-default">State</span>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">State</span>
                         <input type="text" value="{{user_data.shop_state}}" name="shop_state" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-                    <div class="input-group mb-4">
-                        <span class="input-group-text text-white bg-secondary border-secondary" 
-                        id="inputGroup-sizing-default">Zip Code</span>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Zip Code</span>
                         <input type="text" value="{{user_data.shop_zipcode}}" name="shop_zipcode" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default">
                     </div>
-                    <div class="text-center">
-                        <button type="submit" class="mx-1 btn btn-sm btn-outline-success">Submit</button>
-                        <a href="javascript:history.back()" class="mx-1 btn btn-sm btn-outline-success">Back</a>
-                    </div>
                 </div>
-            </div>
-        </form>
+                <div class="text-left">
+                    <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+                    <a href="javascript:history.back()" class="mx-2 btn btn-sm btn-outline-success">Back</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
