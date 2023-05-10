@@ -14,7 +14,7 @@ class UserProfile(models.Model):
     shop_zipcode = models.CharField(max_length=15)
 
     def __str__(self):
-        return self.last_name + ', ' + self.first_name + ', ' + self.shop_name
+        return self.shop_name + ', ' + self.first_name + ' ' + self.last_name
     
     class Meta:
         ordering = ('shop_name',)

@@ -1,0 +1,81 @@
+{% extends 'base-user.html' %} {% block content %}
+<div class="container-md">
+    <div class="row my-2 justify-content-center">
+        <div class="col-md-10">
+            <h2 class="my-3 text-center">Open Cart for {{ profile.shop_name }}</h2>
+            <div class="table-responsive form-control rounded bg-light p-4 mb-3
+                        border border-secondary text-center">
+
+                <table class="table">
+                    <thead>
+                        <tr class="bg-success bg-opacity-50">
+                            <th scope="col">Manager</th>
+                            <th scope="col">Order Date</th>
+                            <th></th>
+                            <th></th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Frame Total</th>
+                            <th></th>
+                            <th scope="col">Total Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                            <td>{{ order.order_date }} </td>
+                            <td></td>
+                            <td></td>
+                            <td>{{ order.due_date }}</td>
+                            <td>{{ frame_total }} </td>
+                            <td></td>
+                            <td>{{ total_cost }} </td>
+                        </tr>
+                        <thead>
+                            <tr class="bg-info bg-opacity-50">
+                                <th scope="col">Profile</th>
+                                <th scope="col">Depth</th>
+                                <th scope="col">Wood</th>
+                                <th scope="col">Spline</th>
+                                <th scope="col">Finish</th>
+                                <th scope="col">Dimensions</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Qauntity</th>
+                            </tr>
+                        </thead>
+                        {% for item in items %}
+                    <tbody>
+                        <tr>
+                            <td>{{ item.profile.number }}</td>
+                            <td>{{ item.depth }}</td>
+                            <td>{{ item.wood.name }}</td>
+                            <td>{{ item.spline.name }}</td>
+                            <td>{{ item.finish.number }}</td>
+                            <td>{{ item.width }} x {{ item.height }}</td>
+                            <td>{{ item.frame_price }}</td>
+                            <td>{{ item.quantity }}</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary">Order
+                            Notes</span>
+                        <textarea class="form-control bg-white border-secondary" rows="3" name="text"
+                            aria-label="With textarea"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="row row-cols-auto">
+                <form class="col" action="">
+                    <button type="submit" class="btn btn-sm btn-outline-success">Submit Order</button>
+                </form>
+                <div class="col">
+                    <a class="btn btn-sm btn-outline-success" href="/place_order/" role="button">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

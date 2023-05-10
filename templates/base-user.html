@@ -18,13 +18,13 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-            <ul class="navbar-nav nav justify-content-center">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item px-4">
                     <a class="nav-link" aria-current="page" href="/client_index/">Client Home</a>
                 </li>
                 <li class="nav-item px-4">
-                    <a class="nav-link" aria-current="page" href="/frame_profiles/">Profiles</a>
+                    <a class="nav-link" aria-current="page" href="/frame_profiles/">Frame Profiles</a>
                 </li>
                 <li class="nav-item px-4 dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -44,18 +44,18 @@
                 <li class="nav-item px-4">
                     <a class="nav-link" aria-current="page" href="/index/">Main Site</a>
                 </li>
-
-                {% if user.is_authenticated %}
-
-                <li class="nav-item px-4">
-                    <a class="nav-link" aria-current="page" href="/logout_user/">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item px-4">
-                    <a class="nav-link" aria-current="page" href="/sign_in/">Login</a>
-                </li>
-                {% endif %}
             </ul>
+            
+            <div class="form-inline me-4 my-2">{{frame_total}}
+                <a href="{% url 'cart' %}">
+                    <img class="img_fluid" id="cart-icon" src="/images/cart.png">
+                </a> 
+            </div>
+            <form class="d-flex" action="{% url 'logout_user' %}">
+                <button type="submit" class="btn btn-sm btn-outline-success">Logout</button>
+            </form>
+            
+                
         </div>
     </nav>
     <div class="d-flex justify-content-center">
