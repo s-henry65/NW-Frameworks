@@ -64,6 +64,10 @@ class Order(models.Model):
     due_date = models.DateField(null=True, blank=True)
     complete = models.BooleanField(default=False)
     notes = models.CharField(max_length=300, blank=True)
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    frame_total = models.IntegerField(null=True, blank=True)
+    order_delivered = models.BooleanField(default=False)
+    order_paid = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.customer) + ', ' + str(self.order_date)

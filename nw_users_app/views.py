@@ -16,13 +16,20 @@ def sign_in(request):
 def index(request):
     return render(request, 'main-site/index.html')
 
+def site_admin(request):
+    return render(request, 'user/admin.html')
+
 def login_user(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(request, username=username, password=password)
     if user is not None:
-        login(request, user)
-        return redirect('client_index')
+        if user.is_staff:
+            login(request, user)
+            return redirect('site_admin')
+        else:
+            login(request, user)
+            return redirect('client_index')
     else:
         messages.warning(request, 'User Name or Password is incorrect')
         return render(request, 'user/login.html')

@@ -11,10 +11,10 @@
                         <tr class="bg-success bg-opacity-50">
                             <th scope="col">Manager</th>
                             <th scope="col">Order Date</th>
-                            <th></th>
-                            <th></th>
-                            <th scope="col">Due Date</th>
                             <th scope="col">Frame Total</th>
+                            <th scope="col">Due Date</th>
+                            <th></th>
+                            <th></th>
                             <th></th>
                             <th scope="col">Total Cost</th>
                         </tr>
@@ -23,10 +23,10 @@
                         <tr>
                             <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
                             <td>{{ order.order_date }} </td>
-                            <td></td>
-                            <td></td>
-                            <td>{{ order.due_date }}</td>
                             <td>{{ frame_total }} </td>
+                            <td>{{ order.due_date }}</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td>{{ total_cost }} </td>
                         </tr>
@@ -57,25 +57,22 @@
                     </tbody>
                     {% endfor %}
                 </table>
-                <form action="" method="POST">
+                <form action="{% url 'close_cart' order.id %}" method="POST">
                     {% csrf_token %}
-                    <div class="input-group">
+                    <div class="input-group mb-3">
                         <span class="input-group-text text-white bg-secondary opacity-75 border-secondary">Order
                             Notes</span>
                         <textarea class="form-control bg-white border-secondary" rows="3" name="text"
                             aria-label="With textarea"></textarea>
                     </div>
+                    <button type="submit" class="btn btn-outline-success">Submit Order</button>
                 </form>
             </div>
-            <div class="row row-cols-auto">
-                <form class="col" action="">
-                    <button type="submit" class="btn btn-sm btn-outline-success">Submit Order</button>
-                </form>
-                <div class="col">
-                    <a class="btn btn-sm btn-outline-success" href="/place_order/" role="button">Add to Cart</a>
-                </div>
+            <div class="col">
+                <a class="btn btn-sm btn-outline-success" href="/place_order/" role="button">Add to Cart</a>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}

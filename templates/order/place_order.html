@@ -1,9 +1,9 @@
 {% extends 'base-user.html' %} {% block content %}
 <div class="container-md">
     <h2 class="text-center mt-4">Place an Order</h2>
-    <div class="row justify-content-center">
-        <div class="p-4 mb-3 form-control border border-secondary bg-light" id="form">
-            <div class='row'>
+    <div class="d-flex justify-content-center">
+        <div class="p-4 form-control border border-secondary bg-light" id="form">
+            <form class='row' action="{% url 'place_order' %}" method="POST">
                 {% csrf_token %}
 
                 <div class="col-md-4 mb-4">
@@ -85,7 +85,7 @@
                             aria-describedby="inputGroup-sizing-default">
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4">
                     <div class="input-group">
                         <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
                             id="inputGroup-sizing-default">Quantity</span>
@@ -94,15 +94,14 @@
                             aria-describedby="inputGroup-sizing-default">
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <form class="col" action="{% url 'place_order' %}">
-                <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+                
+                <div class="justify-content-left">
+                    <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+                </div>
             </form>
+            
         </div>
     </div>
-    
 </div>
 
 

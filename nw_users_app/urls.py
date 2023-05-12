@@ -10,5 +10,5 @@ urlpatterns = [
     path('create_user/', views.create_user, name = 'create_user'),
     path('update_user_profile/', views.update_user_profile, name = 'update_user_profile'),
     path('create_user_profile/<int:id>', views.create_user_profile, name = 'create_user_profile'),
-   
+    path('site_admin/', views.site_admin, name = 'site_admin'),
 ]

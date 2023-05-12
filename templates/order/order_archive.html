@@ -1,15 +1,111 @@
 {% extends 'base-user.html' %} {% block content %}
-
-<div class="container">
-
-    <h2 class="text-center mt-4">Order Archive</h2>
-
+<div class="container-md">
+    <h2 class="text-center mt-4">Order Archive for {{ profile.shop_name }}</h2>
     <div class="d-flex justify-content-center">
-        <div>
-            <div class="col-md-6 p-4 form-control bg-light border border-secondary">
-                
-            </div>
+        <div class="p-4">
+            <form class='row' action="{% url 'order_archive' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Month</span>
+                        <select name="month" class="form-control border-secondary" aria-label="Sizing example input">
+                            <option value="" disabled selected hidden>Select</option>
+                            <option value="all">All</option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Year</span>
+                        <input type="text" name="year" class="form-control 
+                                    bg-white border-secondary" aria-label="Sizing example input" required
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="justify-content-left">
+                    <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
+    {% if order %}
+    <div class="row my-2 justify-content-center">
+        <div class="col-md-10">
+            {% for order in order %}
+            <div class="table-responsive form-control rounded bg-light p-4 mb-3
+                        border border-secondary text-center">
+                
+                <table class="table">
+                    <thead>
+                        <tr class="bg-success bg-opacity-50">
+                            <th scope="col">Order #</th>
+                            <th scope="col">Manager</th>
+                            <th scope="col">Order Date</th>
+                            <th scope="col">Frame Total</th>
+                            <th scope="col">Due Date</th>
+                            <th></th>
+                            <th></th>
+                            <th scope="col">Total Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ order.id }} </td>
+                            <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                            <td>{{ order.order_date }} </td>
+                            <td>{{ order.frame_total }} </td>
+                            <td>{{ order.due_date }}</td>
+                            <td></td>
+                            <td></td>
+                            <td>{{ order.total_cost }} </td>
+                        </tr>
+                        <thead>
+                            <tr class="bg-info bg-opacity-50">
+                                <th scope="col">Profile</th>
+                                <th scope="col">Depth</th>
+                                <th scope="col">Wood</th>
+                                <th scope="col">Spline</th>
+                                <th scope="col">Finish</th>
+                                <th scope="col">Dimensions</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Qauntity</th>
+                            </tr>
+                        </thead>
+                        {% for item in order.orderitem_set.all %}
+                    <tbody>
+                        <tr>
+                            <td>{{ item.profile.number }}</td>
+                            <td>{{ item.depth }}</td>
+                            <td>{{ item.wood.name }}</td>
+                            <td>{{ item.spline.name }}</td>
+                            <td>{{ item.finish.number }}</td>
+                            <td>{{ item.width }} x {{ item.height }}</td>
+                            <td>{{ item.frame_price }}</td>
+                            <td>{{ item.quantity }}</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+                
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
