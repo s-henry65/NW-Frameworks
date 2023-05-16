@@ -1,0 +1,74 @@
+{% extends 'base-admin.html' %} {% block content %}
+<div class="container-md">
+    <h2 class="text-center mt-4">Update Order Status</h2>
+
+    <div class="row my-2 justify-content-center">
+        <div class="col-md-10">
+            <div class="table-responsive form-control rounded bg-light p-4 mb-2
+                        border border-secondary text-center">
+
+                <table class="table">
+                    <thead>
+                        <tr class="bg-info bg-opacity-50">
+                            <th scope="col">Order #</th>
+                            <th scope="col">Manager</th>
+                            <th scope="col">Order Date</th>
+                            <th scope="col">Frame Total</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Total Cost</th>
+                            <th scope="col">Delivered</th>
+                            <th scope="col">Paid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ order.id }} </td>
+                            <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                            <td>{{ order.order_date }} </td>
+                            <td>{{ order.frame_total }} </td>
+                            <td>{{ order.due_date }}</td>
+                            <td>{{ order.total_cost }} </td>
+                            <td>{{ order.order_delivered }}</td>
+                            <td>{{ order.order_paid }}</td>
+                        </tr>
+                        <thead>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center">
+                    <form class="row pt-3 fw-bold justify-content-center" action="{% url 'update_order' order.id %}"
+                        method="POST">
+                        {% csrf_token %}
+                        <div class="col-md-4 mb-4">
+                            <div class="input-group">
+                                <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                                    id="inputGroup-sizing-default">Due Date</span>
+                                <input type="date" name="due_date" class="form-control 
+                                    bg-white border-secondary" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                        </div>
+                        <div class="col-md-8 mb-4">
+                            <div class="form-check form-check-inline mx-2">
+                                <input class="form-check-input" type="checkbox" name="delivered" id="inlineCheckbox1">
+                                <label class="form-check-label" for="inlineCheckbox1">Order Delivered</label>
+                            </div>
+                            <div class="form-check form-check-inline mx-2">
+                                <input class="form-check-input" type="checkbox" name="paid" id="inlineCheckbox2"
+                                    value=True>
+                                <label class="form-check-label" for="inlineCheckbox2">Order Paid</label>
+                            </div>
+                            <div class="form-check form-check-inline mx-2">
+                                <input class="form-check-input" type="checkbox" name="archive" id="inlineCheckbox3"
+                                    value=True>
+                                <label class="form-check-label" for="inlineCheckbox3">Archive</label>
+
+                                <button type="submit" class="btn btn-sm btn-outline-success ms-4">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

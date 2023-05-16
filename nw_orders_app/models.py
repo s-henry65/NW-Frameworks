@@ -60,7 +60,7 @@ class Finish(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True)
-    order_date = models.DateField(auto_now=True)
+    order_date = models.DateField(null=True, blank=True)
     due_date = models.DateField(null=True, blank=True)
     complete = models.BooleanField(default=False)
     notes = models.CharField(max_length=300, blank=True)
@@ -68,9 +68,10 @@ class Order(models.Model):
     frame_total = models.IntegerField(null=True, blank=True)
     order_delivered = models.BooleanField(default=False)
     order_paid = models.BooleanField(default=False)
+    archive = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.customer) + ', ' + str(self.order_date)
+        return str(self.id) + ', ' + str(self.customer) + ', ' + str(self.order_date)
     
     class Meta:
         ordering = ('order_date',)

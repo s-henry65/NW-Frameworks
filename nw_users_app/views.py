@@ -9,6 +9,7 @@ from nw_users_app.models import UserProfile
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from nw_users_app.models import User
+from nw_orders_app.models import Order
 
 def sign_in(request):
     return render(request, 'user/login.html')
@@ -118,3 +119,81 @@ def update_user_profile(request):
         user_data.save()
         messages.warning(request, 'User profile updated!')
         return redirect('client_index')
+    
+@login_required
+def active_orders(request):
+    current_user = request.user
+    profile = UserProfile.objects.get(user_name=current_user)
+    order = Order.objects.filter(archive=False)
+    context = {
+    'profile': profile, 'order': order,
+    }
+    if order.count() == 0:
+        messages.warning(
+            request, 'There are no orders for this selection.')
+        return render(request, 'user/active_orders.html', context)
+    else:
+        return render(request, 'user/active_orders.html', context)
+    
+
+@login_required
+def update_order(request, id):
+    if request.method == 'GET':
+        order = Order.objects.get(id=id)
+        # print('ORDER: ', order)
+        if request.method == 'GET':
+            context = {'order': order,
+                    }
+            return render(request, 'user/update_order.html', context)
+    
+    if request.method == 'POST':
+        order = Order.objects.get(id=id)
+        if request.POST.get('delivered', False):
+            order.order_delivered = True
+        if request.POST.get('paid', False):
+            order.order_paid = True
+        if request.POST.get('archive', False):
+            order.archive = True
+        order.save()
+        try:
+            order.due_date = request.POST['due_date']
+            order.save()
+        except:
+            return redirect('active_orders')
+    
+def admin_order_archive(request):
+    user_data = UserProfile.objects.all()
+    context = { 'user_data': user_data,
+    }
+    if request.method == 'GET':
+        return render(request, 'user/admin_order_archive.html', context)
+    
+    elif request.method == 'POST':
+        customer = request.POST['shop']
+        order_month = request.POST['month']
+        order_year = request.POST['year']
+        # print('CUSTOMER: ', customer)
+        # search_results = Order.objects.filter(customer=customer, archive=True)
+        if order_month == 'all':
+            search_results = Order.objects.filter(customer=customer, archive=True, order_date__year=order_year)
+            context = {
+            'search_results': search_results, "user_data": user_data,
+            }
+            if search_results.count() == 0:
+                messages.warning(
+                    request, 'There are no orders for this selection.')
+                return render(request, 'user/admin_order_archive.html', context)
+            else:
+                return render(request, 'user/admin_order_archive.html', context)
+        else:
+            search_results = Order.objects.filter(customer=customer, archive=True, order_date__year=order_year,
+                order_date__month=order_month)
+            context = {
+            'search_results': search_results, 'user_data': user_data,
+            }
+            if search_results.count() == 0:
+                messages.warning(
+                    request, 'There are no orders for this selection.')
+                return render(request, 'user/admin_order_archive.html', context)
+            else:
+                return render(request, 'user/admin_order_archive.html', context)

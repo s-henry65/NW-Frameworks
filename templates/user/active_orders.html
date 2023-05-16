@@ -1,34 +1,37 @@
-{% extends 'base-user.html' %} {% block content %}
+{% extends 'base-admin.html' %} {% block content %}
 <div class="container-md">
+    <h2 class="text-center mt-4">Active Orders</h2>
+
+    {% if order %}
     <div class="row my-2 justify-content-center">
         <div class="col-md-10">
-            <h2 class="my-3 text-center">Open Cart for {{ profile.shop_name }}</h2>
-            <div class="table-responsive form-control rounded bg-light p-4 mb-3
+            {% for order in order reversed %}
+            <div class="table-responsive form-control rounded bg-light p-4 mb-2
                         border border-secondary text-center">
 
                 <table class="table">
                     <thead>
                         <tr class="bg-info bg-opacity-50">
+                            <th scope="col">Order #</th>
                             <th scope="col">Manager</th>
                             <th scope="col">Order Date</th>
                             <th scope="col">Frame Total</th>
                             <th scope="col">Due Date</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
                             <th scope="col">Total Cost</th>
+                            <th scope="col">Delivered</th>
+                            <th scope="col">Paid</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <td>{{ order.id }} </td>
                             <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
                             <td>{{ order.order_date }} </td>
-                            <td>{{ frame_total }} </td>
+                            <td>{{ order.frame_total }} </td>
                             <td>{{ order.due_date }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>{{ total_cost }} </td>
+                            <td>{{ order.total_cost }} </td>
+                            <td>{{ order.order_delivered }}</td>
+                            <td>{{ order.order_paid }}</td>
                         </tr>
                         <thead>
                             <tr class="bg-secondary bg-opacity-25">
@@ -42,7 +45,7 @@
                                 <th scope="col">Qauntity</th>
                             </tr>
                         </thead>
-                        {% for item in items %}
+                        {% for item in order.orderitem_set.all %}
                     <tbody>
                         <tr>
                             <td>{{ item.profile.number }}</td>
@@ -57,22 +60,14 @@
                     </tbody>
                     {% endfor %}
                 </table>
-                <form action="{% url 'close_cart' order.id %}" method="POST">
-                    {% csrf_token %}
-                    <div class="input-group mb-3">
-                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary">Order
-                            Notes</span>
-                        <textarea class="form-control bg-white border-secondary" rows="3" name="text"
-                            aria-label="With textarea"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-outline-success">Submit Order</button>
-                </form>
+                <div class="row justify-content-left ps-3 fw-bold">
+                    Notes: {{ order.notes }}
+                </div>
             </div>
-            <div class="col">
-                <a class="btn btn-sm btn-outline-success" href="/place_order/" role="button">Add to Cart</a>
-            </div>
+            <a href="{% url 'update_order' order.id %}" class="btn btn-sm btn-outline-success mb-4">Edit Order Status</a>
+            {% endfor %}
         </div>
     </div>
+    {% endif %}
 </div>
-
 {% endblock %}

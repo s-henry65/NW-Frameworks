@@ -11,4 +11,7 @@ urlpatterns = [
     path('update_user_profile/', views.update_user_profile, name = 'update_user_profile'),
     path('create_user_profile/<int:id>', views.create_user_profile, name = 'create_user_profile'),
     path('site_admin/', views.site_admin, name = 'site_admin'),
+    path('active_orders/', views.active_orders, name = 'active_orders'),
+    path('update_order/<int:id>', views.update_order, name = 'update_order'),
+    path('admin_order_archive/', views.admin_order_archive, name = 'admin_order_archive'),
 ]

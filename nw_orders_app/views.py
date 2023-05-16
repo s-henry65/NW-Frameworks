@@ -13,6 +13,7 @@ from nw_orders_app.models import PriceKey
 from nw_orders_app.models import Order
 from nw_orders_app.models import OrderItem
 from fractions import Fraction
+from datetime import date
 
 @login_required
 def place_order(request):
@@ -40,7 +41,7 @@ def place_order(request):
             }
             return render(request, 'order/place_order.html', context)
     elif request.method == 'POST':
-        try:
+        # try:
             order = Order.objects.get(customer=profile, complete=False)
             profile = FrameProfile.objects.get(id=request.POST['profile'])
             depth = int(request.POST['depth'])
@@ -81,15 +82,15 @@ def place_order(request):
             frame_order = OrderItem.objects.create(profile=profile, depth=depth, wood=wood, spline=spline, 
                                                    finish=finish, width=width_fraction, height=height_fraction, 
                                                    ui=united_inches, price_ui=price_finish, frame_price=frame_price,
-                                                   quantity=quantity, order=order)
+                                                   quantity=quantity, order=order,)
             return redirect('cart')
-        except:
-            context = {
-            'current_user': current_user, 'profile_data': profile_data, 'finish_data': finish_data,
-            'wood_data': wood_data,
-        }
-            messages.warning(request, 'Please complete form!')
-            return render(request, 'order/place_order.html', context)
+        # except:
+        #     context = {
+        #     'current_user': current_user, 'profile_data': profile_data, 'finish_data': finish_data,
+        #     'wood_data': wood_data,
+        # }
+        #     messages.warning(request, 'Please complete form!')
+        #     return render(request, 'order/place_order.html', context)
 
 @login_required
 def order_archive(request):
@@ -157,12 +158,14 @@ def cart(request):
    
 @login_required
 def close_cart(request, id):
+    today = date.today()
     order = Order.objects.get(id=id)
     order.frame_total = order.get_cart_items
     order.total_cost = order.get_cart_total
     notes = request.POST.get('text')
     order.notes = notes
     order.complete = True
+    order.order_date = today
     order.save()
     messages.warning(request, 'Order Submitted!')
     return redirect('client_index')
