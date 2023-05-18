@@ -4,9 +4,17 @@ h2 {
     text-shadow: 2px 2px 5px darkgray;
 }
 
+h3 {
+    color:slategrey;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+p {
+    font-size: 14pt;
+}
 .greeting {
-    font-size: 16pt;
-    color:darkgrey;
+    font-size: 18pt;
+    color:slategrey;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
@@ -22,8 +30,17 @@ img {
     border-radius: 6px;
 }
 
+#nav_button {
+    font-size: 14pt;
+}
+
 .navbar {
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 14pt;
+}
+
+.dropdown-menu {
+    font-size: 14pt;
 }
 
 .navbar a {
@@ -44,6 +61,8 @@ img {
 
 #footer {
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:slategrey;
+    font-size: 14pt;
 }
 
 #footer a:active,
@@ -52,7 +71,7 @@ img {
 }
 
 #footer a {
-    color:black;
+    color:slategrey;
     text-decoration: none;
 }
 

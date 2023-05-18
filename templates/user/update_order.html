@@ -11,7 +11,7 @@
                     <thead>
                         <tr class="bg-info bg-opacity-50">
                             <th scope="col">Order #</th>
-                            <th scope="col">Manager</th>
+                            <th scope="col">Shop</th>
                             <th scope="col">Order Date</th>
                             <th scope="col">Frame Total</th>
                             <th scope="col">Due Date</th>
@@ -22,12 +22,12 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ order.id }} </td>
-                            <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
-                            <td>{{ order.order_date }} </td>
-                            <td>{{ order.frame_total }} </td>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.customer.shop_name }}</td>
+                            <td>{{ order.order_date }}</td>
+                            <td>{{ order.frame_total }}</td>
                             <td>{{ order.due_date }}</td>
-                            <td>{{ order.total_cost }} </td>
+                            <td>{{ order.total_cost }}</td>
                             <td>{{ order.order_delivered }}</td>
                             <td>{{ order.order_paid }}</td>
                         </tr>

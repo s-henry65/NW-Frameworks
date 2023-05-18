@@ -1,6 +1,6 @@
 {% extends 'base-admin.html' %} {% block content %}
 <div class="container-md">
-    <h2 class="text-center mt-4">Active Orders</h2>
+    <h2 class="text-center mt-4 mb-4">Active Orders</h2>
 
     {% if order %}
     <div class="row my-2 justify-content-center">
@@ -13,7 +13,7 @@
                     <thead>
                         <tr class="bg-info bg-opacity-50">
                             <th scope="col">Order #</th>
-                            <th scope="col">Manager</th>
+                            <th scope="col">Shop</th>
                             <th scope="col">Order Date</th>
                             <th scope="col">Frame Total</th>
                             <th scope="col">Due Date</th>
@@ -25,7 +25,7 @@
                     <tbody>
                         <tr>
                             <td>{{ order.id }} </td>
-                            <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                            <td>{{ order.customer.shop_name }}</td>
                             <td>{{ order.order_date }} </td>
                             <td>{{ order.frame_total }} </td>
                             <td>{{ order.due_date }}</td>
@@ -64,7 +64,7 @@
                     Notes: {{ order.notes }}
                 </div>
             </div>
-            <a href="{% url 'update_order' order.id %}" class="btn btn-sm btn-outline-success mb-4">Edit Order Status</a>
+            <a href="{% url 'update_order' order.id %}" class="btn btn-sm btn-outline-success mt-1 mb-4">Edit Order Status</a>
             {% endfor %}
         </div>
     </div>
