@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import ContactForm
+from nw_users_app.models import UserProfile
 
 def index(request):
     return render(request, 'main-site/index.html')
@@ -37,4 +38,8 @@ def restoration(request):
     return render(request, 'main-site/restoration.html')
 
 def retailer(request):
-    return render(request, 'main-site/retailer.html')
+    shops = UserProfile.objects.all()
+    context = {
+        'shops': shops
+    }
+    return render(request, 'main-site/retailer.html', context)

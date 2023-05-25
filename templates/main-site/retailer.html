@@ -1,10 +1,71 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container text-center">
+<div class="container" id='form' >
 
-    <h2>Find Retailer</h2>
+    
+    <div class="justify-content-center">
+        <div class='row'>
 
-    <div class="d-flex my-4 justify-content-center">
-        
+            <div class="col-md-6 mb-4">
+                <h2 class="text-center">Oregon</h2>
+                <div class="form-control border border-secondary bg-light ps-4">
+                    {% for shop in shops %}
+                    {% if shop.shop_state == 'OR' %}
+                    <p>
+                    <div class="fw-bold">
+                        {{ shop.shop_name }}
+                    </div>
+                    <div id="website_link">
+                        {{ shop.shop_address }}<br>
+                        {{ shop.shop_city }}, {{ shop.shop_state }} {{ shop.shop_zipcode }}<br>
+                        {{ shop.phone_num }}<br>
+                        <a href='{{ shop.website }}' target="_blank"> Website </a>
+                    </div>
+                    </p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <h2 class="text-center">Washington</h2>
+                <div class="form-control border border-secondary bg-light ps-4">
+                    {% for shop in shops %}
+                    {% if shop.shop_state == 'WA' %}
+                    <p>
+                    <div class="fw-bold">
+                        {{ shop.shop_name }}
+                    </div>
+                    <div id="website_link">
+                        {{ shop.shop_address }}<br>
+                        {{ shop.shop_city }}, {{ shop.shop_state }} {{ shop.shop_zipcode }}<br>
+                        {{ shop.phone_num }}<br>
+                        <a href='{{ shop.website }}' target="_blank"> Website </a>
+                    </div>
+                    </p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <h2 class="text-center">Other</h2>
+                <div class="form-control border border-secondary bg-light ps-4">
+                    {% for shop in shops %}
+                    {% if shop.shop_state != 'OR' and shop.shop_state != 'WA'%}
+                    <p>
+                    <div class="fw-bold">
+                        {{ shop.shop_name }}
+                    </div>
+                    <div id="website_link">
+                        {{ shop.shop_address }}<br>
+                        {{ shop.shop_city }}, {{ shop.shop_state }} {{ shop.shop_zipcode }}<br>
+                        {{ shop.phone_num }}<br>
+                        <a href='{{ shop.website }}' target="_blank"> Website </a>
+                    </div>
+                    </p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

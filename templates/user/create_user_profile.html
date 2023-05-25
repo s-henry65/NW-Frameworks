@@ -33,7 +33,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
                                 id="inputGroup-sizing-default">First Name</span>
-                            <input type="text" value="{{user_data.first_name}}" name="first_name" class="form-control 
+                            <input type="text" name="first_name" class="form-control 
                         border-secondary" required aria-label="Sizing example input"
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
@@ -42,7 +42,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
                                 id="inputGroup-sizing-default">Last Name</span>
-                            <input type="text" value="{{user_data.last_name}}" name="last_name" class="form-control 
+                            <input type="text" name="last_name" class="form-control 
                         bg-white border-secondary" required aria-label="Sizing example input"
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
@@ -51,7 +51,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
                                 id="inputGroup-sizing-default">Phone Number</span>
-                            <input type="text" value="{{user_data.phone_num}}" name="phone_num" class="form-control 
+                            <input type="text" placeholder="e.g. 111-222-3333" name="phone_num" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
@@ -69,7 +69,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
                                 id="inputGroup-sizing-default">Shop Name</span>
-                            <input type="text" value="{{user_data.shop_name}}" name="shop_name" class="form-control 
+                            <input type="text" name="shop_name" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
@@ -78,7 +78,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
                                 id="inputGroup-sizing-default">Shop Address</span>
-                            <input type="text" value="{{user_data.shop_address}}" name="shop_address" class="form-control 
+                            <input type="text" name="shop_address" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
@@ -87,7 +87,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
                                 id="inputGroup-sizing-default">City</span>
-                            <input type="text" value="{{user_data.shop_city}}" name="shop_city" class="form-control 
+                            <input type="text" name="shop_city" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
@@ -96,7 +96,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
                                 id="inputGroup-sizing-default">State</span>
-                            <input type="text" value="{{user_data.shop_state}}" name="shop_state" class="form-control 
+                            <input type="text" placeholder="e.g. OR" name="shop_state" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
@@ -105,8 +105,17 @@
                         <div class="input-group">
                             <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
                                 id="inputGroup-sizing-default">Zip Code</span>
-                            <input type="text" value="{{user_data.shop_zipcode}}" name="shop_zipcode" class="form-control 
+                            <input type="text" name="shop_zipcode" class="form-control 
                                 bg-white border-secondary" required aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                                id="inputGroup-sizing-default">Website</span>
+                            <input type="text" placeholder="e.g. https://example.com" name="website" class="form-control 
+                                    bg-white border-secondary" aria-label="Sizing example input"
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
                     </div>

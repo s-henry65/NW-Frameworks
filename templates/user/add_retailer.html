@@ -1,0 +1,79 @@
+{% extends 'base-admin.html' %} {% block content %}
+<div class="container">
+    <h2 class="text-center mt-4 mb-3">Add Retailer</h2>
+    <div class="d-flex  justify-content-center">
+        <div class="p-4 form-control border border-secondary bg-light" id="form">
+            <form class='row' action="{% url 'add_retailer' %}" method="POST">
+                {% csrf_token %}
+                
+                <div class="col-md-12 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Shop Name</span>
+                        <input type="text" name="shop_name" class="form-control 
+                                bg-white border-secondary" required aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Shop Address</span>
+                        <input type="text" name="shop_address" class="form-control 
+                                bg-white border-secondary" required aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">City</span>
+                        <input type="text" name="shop_city" class="form-control 
+                                bg-white border-secondary" required aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">State</span>
+                        <input type="text" name="shop_state" class="form-control 
+                                bg-white border-secondary" required aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Zip Code</span>
+                        <input type="text" name="shop_zipcode" class="form-control 
+                                bg-white border-secondary" required aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Phone Number</span>
+                        <input type="text" name="phone_num" class="form-control 
+                                bg-white border-secondary" required aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Phone Number</span>
+                        <input type="text" placeholder="https://example.com" name="website" class="form-control 
+                                bg-white border-secondary" required aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="text-left">
+                    <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

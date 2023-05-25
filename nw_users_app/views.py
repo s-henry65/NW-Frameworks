@@ -10,6 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from nw_users_app.models import User
 from nw_orders_app.models import Order
+# from nw_users_app.models import Retailer
 
 def sign_in(request):
     return render(request, 'user/login.html')
@@ -37,8 +38,10 @@ def login_user(request):
 
 @login_required
 def client_index(request):
+    current_user = request.user
+    if current_user.is_staff:
+        return render(request, 'user/client_index.html')
     try:
-        current_user = request.user
         id = current_user.id
         user_data = UserProfile.objects.get(user_name = current_user)
         context = { 'user_data' : user_data
@@ -78,7 +81,7 @@ def create_user_profile(request, id):
     context = { 'user_data' : user_data
     }
     if request.method == 'GET':
-        return render(request, 'user/user_profile.html', context)
+        return render(request, 'user/create_user_profile.html', context)
     elif request.method == 'POST':
         user_name = current_user
         first_name = request.POST['first_name']
@@ -101,7 +104,7 @@ def create_user_profile(request, id):
 def update_user_profile(request):
     current_user = request.user
     user_data = UserProfile.objects.get(user_name = current_user)
-    print('USER: ', user_data)
+    # print('USER: ', user_data)
     context = { 'user_data' : user_data
     }
     if request.method == 'GET':
@@ -122,11 +125,9 @@ def update_user_profile(request):
     
 @login_required
 def active_orders(request):
-    current_user = request.user
-    profile = UserProfile.objects.get(user_name=current_user)
     order = Order.objects.filter(archive=False)
     context = {
-    'profile': profile, 'order': order,
+        'order': order,
     }
     if order.count() == 0:
         messages.warning(
@@ -197,3 +198,38 @@ def admin_order_archive(request):
                 return render(request, 'user/admin_order_archive.html', context)
             else:
                 return render(request, 'user/admin_order_archive.html', context)
+    
+@login_required
+def update_user(request):
+    shops = UserProfile.objects.all()
+    context = { 'shops' : shops
+    }
+    return render(request, 'user/update_user.html', context)
+
+# @login_required
+# def edit_user_data(request, id):
+#     if request.method == 'GET':
+#         shop = Retailer.objects.get(id=id)
+#         context = {
+#             'shop': shop,
+#         }
+#         return render(request, 'user/edit_retailer.html', context)
+#     elif request.method == 'POST':
+#         shop = Retailer.objects.get(id=id)
+#         shop.phone_num = request.POST['phone_num']
+#         shop.website = request.POST['website']
+#         shop.shop_name = request.POST['shop_name']
+#         shop.shop_address = request.POST['shop_address']
+#         shop.shop_city = request.POST['shop_city']
+#         shop.shop_state = request.POST['shop_state']
+#         shop.shop_zipcode = request.POST['shop_zipcode']
+#         shop.save()
+#         messages.warning(request, 'Retailer updated!')
+#         return redirect('site_admin')
+    
+
+@login_required
+def delete_user(request, id):
+    shop = UserProfile.objects.get(id = id)
+    shop.delete()
+    return redirect('update_user')

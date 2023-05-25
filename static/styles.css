@@ -88,6 +88,12 @@ img {
     max-height: 40px;
 }
 
-/* #cart-icon a:hover {
-    min-height: 100px;
-} */
+#website_link a:hover {
+    color:darkred;
+}
+
+#website_link a {
+    color:slategrey;
+    text-decoration: none;
+    font-weight: bold;
+}
