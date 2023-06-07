@@ -58,6 +58,55 @@ class Finish(models.Model):
     class Meta:
         ordering = ('number',)
 
+class Corner(models.Model):
+    name = models.CharField(max_length=20)
+    image = models.ImageField(blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.name + ', ' + str(self.price)
+     
+    class Meta:
+        ordering = ('name',)
+
+class Gold(models.Model):
+    name = models.CharField(max_length=10, blank=True)
+    image = models.ImageField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+class TopTreatment(models.Model):
+    gold = models.ForeignKey(Gold, on_delete=models.SET_NULL, null=True, blank=True)
+    name = models.CharField(max_length=20, blank=True)
+    image = models.ImageField(blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return str(self.gold) + ', ' + self.name + ', ' + str(self.price)
+     
+    class Meta:
+        ordering = ('gold', 'name')
+
+class SideTreatment(models.Model):
+    gold = models.ForeignKey(Gold, on_delete=models.SET_NULL, null=True, blank=True)
+    name = models.CharField(max_length=20, blank=True)
+    image = models.ImageField(blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return str(self.gold) + ', ' + self.name + ', ' + str(self.price)
+     
+    class Meta:
+        ordering = ('gold', 'name')
+
+class Bole(models.Model):
+    name = models.CharField(max_length=10, blank=True)
+    image = models.ImageField(blank=True)
+
+    def __str__(self):
+        return self.name
+    
 class Order(models.Model):
     customer = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True)
     order_date = models.DateField(null=True, blank=True)
@@ -74,7 +123,7 @@ class Order(models.Model):
         return str(self.id) + ', ' + str(self.customer) + ', ' + str(self.order_date)
     
     class Meta:
-        ordering = ('order_date',)
+        ordering = ('id',)
 
     @property
     def get_cart_total(self):
@@ -102,6 +151,13 @@ class OrderItem(models.Model):
     price_ui = models.DecimalField(max_digits=10, decimal_places=2)
     ui = models.DecimalField(max_digits=10, decimal_places=2)
     frame_price = models.DecimalField(max_digits=10, decimal_places=2)
+    corner = models.ForeignKey(Corner, on_delete=models.SET_NULL, null=True)
+    gold = models.ForeignKey(Gold, on_delete=models.SET_NULL, null=True, blank=True)
+    side_treatment = models.ForeignKey(SideTreatment, on_delete=models.SET_NULL, null=True, blank=True)
+    top_treatment = models.ForeignKey(TopTreatment, on_delete=models.SET_NULL, null=True, blank=True)
+    bole = models.ForeignKey(Bole, on_delete=models.SET_NULL, null=True, blank=True)
+    gold_ordered = models.BooleanField(default=False)
+    gold_cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
         return f'{self.profile} , {self.width} x {self.height}'

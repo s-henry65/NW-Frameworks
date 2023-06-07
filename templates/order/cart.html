@@ -1,10 +1,10 @@
 {% extends 'base-user.html' %} {% block content %}
 <div class="container-md">
     <div class="row my-2 justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h2 class="my-3 text-center">Open Cart for {{ profile.shop_name }}</h2>
             <div class="table-responsive form-control rounded bg-light p-4 mb-3
-                        border border-secondary text-center">
+                        border border-secondary text-left">
 
                 <table class="table">
                     <thead>
@@ -13,6 +13,10 @@
                             <th scope="col">Order Date</th>
                             <th scope="col">Frame Total</th>
                             <th scope="col">Due Date</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -28,15 +32,23 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td>{{ total_cost }} </td>
                         </tr>
                         <thead>
-                            <tr class="bg-secondary bg-opacity-25">
+                            <tr class="bg-success bg-opacity-25">
                                 <th scope="col">Profile</th>
                                 <th scope="col">Depth</th>
                                 <th scope="col">Wood</th>
                                 <th scope="col">Spline</th>
+                                <th scope="col">Corner</th>
                                 <th scope="col">Finish</th>
+                                <th scope="col">Top Gold</th>
+                                <th scope="col">Side Gold</th>
+                                <th scope="col">Bole</th>
                                 <th scope="col">Dimensions</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Qauntity</th>
@@ -49,7 +61,11 @@
                             <td>{{ item.depth }}</td>
                             <td>{{ item.wood.name }}</td>
                             <td>{{ item.spline.name }}</td>
+                            <td>{{ item.corner.name }}</td>
                             <td>{{ item.finish.number }}</td>
+                            <td>{{ item.top_treatment.gold }} {{ item.top_treatment.name }}</td>
+                            <td>{{ item.side_treatment.gold }} {{ item.side_treatment.name }}</td>
+                            <td>{{ item.bole.name }}</td>
                             <td>{{ item.width }} x {{ item.height }}</td>
                             <td>{{ item.frame_price }}</td>
                             <td>{{ item.quantity }}</td>

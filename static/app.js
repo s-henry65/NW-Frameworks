@@ -1,7 +1,16 @@
-console.log('Hello World!');
-// window.alert("JavaScript Loaded");
+// const toggle = document.querySelector(".toggle");
 
-// $('.nav-link').on('click', function(){
-//     $('.nav-link').removeClass('selected');
-//     $(this).addClass('selected');
-//   });
+// toggle.addEventListener("click", (e) => {
+//     if (toggle.innerText === "Show Gold") {
+//         toggle.innerText = "Hide Gold";
+//     } else {
+//       toggle.innerText = "Show Gold";
+//     }
+// });
+
+$(document).ready(function () {
+    $("#gold").hide()
+    $(".toggle").click(function(){
+        $("#gold").toggle();
+    });
+});

@@ -9,7 +9,11 @@ from nw_orders_app.models import FrameProfile
 from nw_orders_app.models import Finish
 from nw_orders_app.models import Wood
 from nw_orders_app.models import Spline
-from nw_orders_app.models import PriceKey
+from nw_orders_app.models import Corner
+from nw_orders_app.models import Gold
+from nw_orders_app.models import Bole
+from nw_orders_app.models import TopTreatment
+from nw_orders_app.models import SideTreatment
 from nw_orders_app.models import Order
 from nw_orders_app.models import OrderItem
 from fractions import Fraction
@@ -23,6 +27,11 @@ def place_order(request):
     finish_data = Finish.objects.all()
     wood_data = Wood.objects.all()
     spline_data = Spline.objects.all()
+    gold_data = Gold.objects.all()
+    bole_data = Bole.objects.all()
+    side_data = SideTreatment.objects.all()
+    top_data = TopTreatment.objects.all()
+
     
     if request.method == 'GET':
         try:
@@ -31,6 +40,7 @@ def place_order(request):
             context = {
                 'current_user': current_user, 'profile_data': profile_data, 'finish_data': finish_data,
                 'wood_data': wood_data, 'spline_data': spline_data, 'frame_total': frame_total,
+                'gold_data': gold_data, 'bole_data': bole_data, 'side_data': side_data, 'top_data': top_data,
             }
             return render(request, 'order/place_order.html', context)
         except:
@@ -38,12 +48,14 @@ def place_order(request):
             context = {
                 'current_user': current_user, 'profile_data': profile_data, 'finish_data': finish_data,
                 'wood_data': wood_data, 'spline_data': spline_data,
+                'gold_data': gold_data, 'bole_data': bole_data, 'side_data': side_data, 'top_data': top_data,
             }
             return render(request, 'order/place_order.html', context)
     elif request.method == 'POST':
         # try:
             order = Order.objects.get(customer=profile, complete=False)
             profile = FrameProfile.objects.get(id=request.POST['profile'])
+            corner = Corner.objects.get(name=request.POST['radius'])
             depth = int(request.POST['depth'])
             spline = Spline.objects.get(id=request.POST['spline'])
             wood = Wood.objects.get(id=request.POST['wood'])
@@ -52,10 +64,26 @@ def place_order(request):
             width = float(profile.width_quarters)
             frame_width = (request.POST['frame_width'])
             frame_height = (request.POST['frame_height'])
+            print('Corner: ',corner.price)
             quantity = (request.POST['quantity'])
+            # gold data
+            if request.POST.get('gold', False):
+                gold_ordered = True
+            else:
+                gold_ordered = False
+            print('Gold Status: ', gold_ordered)
+            if gold_ordered == True:
+                bole = Bole.objects.get(id=request.POST['bole'])
+                print('Bole: ', bole.name)
+                top = TopTreatment.objects.get(id=request.POST['top'])
+                print('Top: ', top.name, top.gold)
+                side = SideTreatment.objects.get(id=request.POST['side'])
+                print('Side: ', side.name, side.gold)
+        
             # calculate profile cost
             price_profile = round((width * key) * depth, 2)
             price_wood = round(price_profile * float(wood.price_modifier), 2)
+            print('Base Price: ', price_wood)
             price_finish = round(price_wood * float(finish.price_modifier), 2)
             # convert fractions to float
             width_list = frame_width.split()
@@ -75,15 +103,26 @@ def place_order(request):
             united_inches = ((width / 4) * 12) + frame_perimeter
             print('Width: ', (width / 4))
             united_inches = round(united_inches / 12, 2)
-            print('Price/UI: ', price_finish)
+            print('Price w/finish: ', price_finish)
             print('United inches: ', united_inches)
             frame_price = round(united_inches * price_finish, 2)
             print('Frame price: ', frame_price)
-            frame_order = OrderItem.objects.create(profile=profile, depth=depth, wood=wood, spline=spline, 
-                                                   finish=finish, width=width_fraction, height=height_fraction, 
-                                                   ui=united_inches, price_ui=price_finish, frame_price=frame_price,
-                                                   quantity=quantity, order=order,)
-            return redirect('cart')
+            # add $ for radius corners
+            frame_price += float(corner.price)
+            print('Frame price w/corners: ', frame_price)
+            if gold_ordered == True:
+                OrderItem.objects.create(profile=profile, depth=depth, wood=wood, spline=spline, corner=corner,
+                                                finish=finish, width=width_fraction, height=height_fraction, 
+                                                ui=united_inches, price_ui=price_finish, frame_price=frame_price,
+                                                quantity=quantity, gold_ordered=gold_ordered, side_treatment=side,
+                                                top_treatment=top, bole=bole, order=order,)
+                return redirect('cart')
+            else:
+                OrderItem.objects.create(profile=profile, depth=depth, wood=wood, spline=spline, corner=corner,
+                                                finish=finish, width=width_fraction, height=height_fraction, 
+                                                ui=united_inches, price_ui=price_finish, frame_price=frame_price,
+                                                quantity=quantity, order=order,)
+                return redirect('cart')
         # except:
         #     context = {
         #     'current_user': current_user, 'profile_data': profile_data, 'finish_data': finish_data,

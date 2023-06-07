@@ -7,7 +7,7 @@
         <div class="col-md-10">
             {% for order in order reversed %}
             <div class="table-responsive form-control rounded bg-light p-4 mb-2
-                        border border-secondary text-center">
+                        border border-secondary text-left">
 
                 <table class="table">
                     <thead>
@@ -18,6 +18,7 @@
                             <th scope="col">Frame Total</th>
                             <th scope="col">Due Date</th>
                             <th scope="col">Total Cost</th>
+                            <th scope="col">Submited</th>
                             <th scope="col">Delivered</th>
                             <th scope="col">Paid</th>
                         </tr>
@@ -30,6 +31,7 @@
                             <td>{{ order.frame_total }} </td>
                             <td>{{ order.due_date }}</td>
                             <td>{{ order.total_cost }} </td>
+                            <td>{{ order.complete }}</td>
                             <td>{{ order.order_delivered }}</td>
                             <td>{{ order.order_paid }}</td>
                         </tr>
@@ -39,6 +41,7 @@
                                 <th scope="col">Depth</th>
                                 <th scope="col">Wood</th>
                                 <th scope="col">Spline</th>
+                                <th scope="col">Corner</th>
                                 <th scope="col">Finish</th>
                                 <th scope="col">Dimensions</th>
                                 <th scope="col">Price</th>
@@ -52,6 +55,7 @@
                             <td>{{ item.depth }}</td>
                             <td>{{ item.wood.name }}</td>
                             <td>{{ item.spline.name }}</td>
+                            <td>{{ item.corner.name }}</td>
                             <td>{{ item.finish.number }}</td>
                             <td>{{ item.width }} x {{ item.height }}</td>
                             <td>{{ item.frame_price }}</td>
@@ -60,8 +64,9 @@
                     </tbody>
                     {% endfor %}
                 </table>
-                <div class="row justify-content-left ps-3 fw-bold">
-                    Notes: {{ order.notes }}
+                <div class="row justify-content-left ps-2 fw-bold">
+                    <div class="col-md-1"> Notes: </div>
+                    <div class='col-md-9 fw-normal'> {{ order.notes }}</div>
                 </div>
             </div>
             <a href="{% url 'update_order' order.id %}" class="btn btn-sm btn-outline-success mt-1 mb-4">Edit Order Status</a>

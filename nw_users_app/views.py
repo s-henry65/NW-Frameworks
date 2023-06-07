@@ -42,11 +42,19 @@ def client_index(request):
     if current_user.is_staff:
         return render(request, 'user/client_index.html')
     try:
+        profile = UserProfile.objects.get(user_name=current_user)
         id = current_user.id
         user_data = UserProfile.objects.get(user_name = current_user)
-        context = { 'user_data' : user_data
-        }
-        return render(request, 'user/client_index.html', context)
+        try:
+            order = Order.objects.get(customer=profile.id, complete=False)
+            frame_total = order.get_cart_items
+            context = { 'user_data': user_data, 'frame_total': frame_total,
+            }
+            return render(request, 'user/client_index.html', context)
+        except:
+            context = { 'user_data': user_data,
+            }
+            return render(request, 'user/client_index.html', context)
     except:
         messages.warning(request, 'Please setup a User Profile to continue')
         return redirect('create_user_profile', id)
@@ -159,6 +167,7 @@ def update_order(request, id):
         try:
             order.due_date = request.POST['due_date']
             order.save()
+            return redirect('active_orders')
         except:
             return redirect('active_orders')
     

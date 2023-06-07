@@ -1,4 +1,7 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 {% extends 'base-user.html' %} {% block content %}
+
 <div class="container-md">
     <h2 class="text-center my-4">Place an Order</h2>
     <div class="d-flex justify-content-center">
@@ -88,21 +91,79 @@
                 <div class="col-md-4 mb-4">
                     <div class="input-group">
                         <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                            id="inputGroup-sizing-default">Corners</span>
+                        <select name="radius" class="form-control border-secondary" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" required>
+                            <option value="Square">Square</option>
+                            <option value="Single Radius">Single Radius</option>
+                            <option value="Double Radius">Double Radius</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- gold section -->
+                <div class="row" id="gold">
+                    <div class="col-md-6 mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                                id="inputGroup-sizing-default">Top Treatment</span>
+                            <select name="top" class="form-control border-secondary" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default">
+                                <option value="" disabled selected hidden>Select</option>
+                                {% for top in top_data %}
+                                <option value="{{top.id}}">{{top.gold}}, {{top.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                                id="inputGroup-sizing-default">Side Treatment</span>
+                            <select name="side" class="form-control border-secondary" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default">
+                                <option value="" disabled selected hidden>Select</option>
+                                {% for side in side_data %}
+                                <option value="{{side.id}}">{{side.gold}}, {{side.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
+                                id="inputGroup-sizing-default">Bole</span>
+                            <select name="bole" class="form-control border-secondary" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-default">
+                                <option value="" disabled selected hidden>Select</option>
+                                {% for bole in bole_data %}
+                                <option value="{{bole.id}}">{{bole.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text text-white bg-secondary opacity-75 border-secondary"
                             id="inputGroup-sizing-default">Quantity</span>
                         <input type="text" name="quantity" class="form-control 
                                     bg-white border-secondary" aria-label="Sizing example input" required
                             aria-describedby="inputGroup-sizing-default">
                     </div>
                 </div>
-                
+                <div class="form-check form-check-inline mb-4 ms-3">
+                    <input class="toggle form-check-input" type="checkbox" name="gold" id="inlineCheckbox1">
+                    <label class="toggle form-check-label" for="inlineCheckbox1">Show Gold</label>
+                </div>
                 <div class="justify-content-left">
                     <button type="submit" class="btn btn-sm btn-outline-success">Submit</button>
                 </div>
             </form>
-            
         </div>
     </div>
 </div>
+
 
 
 {% endblock %}
