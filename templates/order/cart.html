@@ -1,7 +1,7 @@
 {% extends 'base-user.html' %} {% block content %}
 <div class="container-md">
     <div class="row my-2 justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <h2 class="my-3 text-center">Open Cart for {{ profile.shop_name }}</h2>
             <div class="table-responsive form-control rounded bg-light p-4 mb-3
                         border border-secondary text-left">
@@ -13,9 +13,6 @@
                             <th scope="col">Order Date</th>
                             <th scope="col">Frame Total</th>
                             <th scope="col">Due Date</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -33,9 +30,6 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                             <td>{{ total_cost }} </td>
                         </tr>
                         <thead>
@@ -46,9 +40,6 @@
                                 <th scope="col">Spline</th>
                                 <th scope="col">Corner</th>
                                 <th scope="col">Finish</th>
-                                <th scope="col">Top Gold</th>
-                                <th scope="col">Side Gold</th>
-                                <th scope="col">Bole</th>
                                 <th scope="col">Dimensions</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Qauntity</th>
@@ -63,14 +54,40 @@
                             <td>{{ item.spline.name }}</td>
                             <td>{{ item.corner.name }}</td>
                             <td>{{ item.finish.number }}</td>
-                            <td>{{ item.top_treatment.gold }} {{ item.top_treatment.name }}</td>
-                            <td>{{ item.side_treatment.gold }} {{ item.side_treatment.name }}</td>
-                            <td>{{ item.bole.name }}</td>
                             <td>{{ item.width }} x {{ item.height }}</td>
                             <td>{{ item.frame_price }}</td>
                             <td>{{ item.quantity }}</td>
                         </tr>
                     </tbody>
+                    {% if item.gold_ordered %}
+                    <thead>
+                        <tr class="bg-secondary bg-opacity-25">
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th scope="col">Top Gold</th>
+                            <th scope="col">Side Gold</th>
+                            <th scope="col">Bole</th>
+                            <th scope="col">Gold Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{ item.top_treatment.gold }} {{ item.top_treatment.name }}</td>
+                            <td>{{ item.side_treatment.gold }} {{ item.side_treatment.name }}</td>
+                            <td>{{ item.bole.name }}</td>
+                            <td>{{ item.gold_cost }}</td>
+                        </tr>
+                    </tbody>
+                    {% endif %}
                     {% endfor %}
                 </table>
                 <form action="{% url 'close_cart' order.id %}" method="POST">
