@@ -4,7 +4,7 @@
 
     {% if order %}
     <div class="row my-2 justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             {% for order in order reversed %}
             <div class="table-responsive form-control rounded bg-light p-4 mb-2
                         border border-secondary text-left">
@@ -44,8 +44,9 @@
                                 <th scope="col">Corner</th>
                                 <th scope="col">Finish</th>
                                 <th scope="col">Dimensions</th>
-                                <th scope="col">Price</th>
                                 <th scope="col">Qauntity</th>
+                                <th scope="col">Price</th>
+                                
                             </tr>
                         </thead>
                         {% for item in order.orderitem_set.all %}
@@ -58,10 +59,29 @@
                             <td>{{ item.corner.name }}</td>
                             <td>{{ item.finish.number }}</td>
                             <td>{{ item.width }} x {{ item.height }}</td>
-                            <td>{{ item.frame_price }}</td>
                             <td>{{ item.quantity }}</td>
+                            <td>{{ item.frame_price }}</td>
+                            
                         </tr>
                     </tbody>
+
+                    {% if item.gold_ordered %}
+
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="fw-bold">Top Gold/Finish:</td>
+                            <td>{{ item.top_treatment.gold }} {{ item.top_treatment.name }}</td>
+                            <td class="fw-bold">Side Gold/Finish:</td>
+                            <td>{{ item.side_treatment.gold }} {{ item.side_treatment.name }}</td>
+                            <td class="fw-bold">Bole:</td>
+                            <td>{{ item.bole.name }}</td>
+                            <td class="fw-bold">Gold Cost:</td>
+                            <td>{{ item.gold_cost }}</td>
+                        </tr>
+                    </tbody>
+
+                    {% endif %}
                     {% endfor %}
                 </table>
                 <div class="row justify-content-left ps-2 fw-bold">

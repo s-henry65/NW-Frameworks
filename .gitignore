@@ -9,4 +9,3 @@ Pipfile
 .env
 images_xtra
 holding_tank.txt
-db.sqlite3
