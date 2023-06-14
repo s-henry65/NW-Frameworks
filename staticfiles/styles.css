@@ -1,0 +1,99 @@
+h2 {
+    color:darkgreen;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 2px 2px 5px darkgray;
+}
+
+h3 {
+    color:slategrey;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+p {
+    font-size: 14pt;
+}
+.greeting {
+    font-size: 18pt;
+    color:slategrey;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+body {
+    font-family:'Verdana, Segoe UI', Tahoma, Geneva, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* background-image: url('/images/bg_wood.jpg'); */
+}
+
+img {
+    border-radius: 6px;
+}
+
+#nav_button {
+    font-size: 14pt;
+}
+
+.navbar {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 14pt;
+}
+
+.dropdown-menu {
+    font-size: 14pt;
+}
+
+.navbar a {
+    color:black;
+    text-decoration: none;
+}
+    
+.navbar a:active,
+.navbar a:hover {
+    color:darkred;
+}
+
+.dropdown-menu a:active,
+.navbar a:hover {
+    color:darkred;
+    background-color: white;
+}
+
+#footer {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:slategrey;
+    font-size: 14pt;
+}
+
+#footer a:active,
+#footer a:hover {
+    color:darkred;
+}
+
+#footer a {
+    color:slategrey;
+    text-decoration: none;
+}
+
+.alert {
+    color:crimson;
+}
+
+#form {
+    /* align-content: center; */
+    max-width: 800px;
+}
+
+#cart-icon {
+    max-height: 40px;
+}
+
+#website_link a:hover {
+    color:darkred;
+}
+
+#website_link a {
+    color:slategrey;
+    text-decoration: none;
+    font-weight: bold;
+}
